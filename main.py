@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Unique key generate karne ka function
 def generate_unique_key():
-    return str(random.randint(100000, 999999))  # 6-digit random key generate karo
+    return str(random.randint(1000000000, 9999997777))  # 10-digit random key generate karo
 
 # Approvals ko load karne ka function
 def load_approvals():
