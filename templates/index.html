@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approval Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        img {
+            width: 200px; /* Adjust as needed */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Request Approval</h1>
+    <img src="https://iili.io/2B97Tnj.jpg" alt="Approval Image">
+    <p>This is your key - <span id="unique-key"></span></p>
+    <button id="send-approval">Send Approval</button>
+    <p>Contact: <a href="https://www.facebook.com/The.drugs.ft.chadwick.67">Facebook</a></p>
+
+    <script>
+        // Generate a unique key
+        const uniqueKey = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+        document.getElementById('unique-key').innerText = uniqueKey;
+
+        document.getElementById('send-approval').onclick = function() {
+            fetch('/send_approval', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ key: uniqueKey })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Approval request sent! Your key: ' + uniqueKey);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    </script>
+</body>
+</html>
